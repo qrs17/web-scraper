@@ -7,8 +7,7 @@ app.get('/', function (req, res) {
   getTable().then(
     function(value) {console.log(value);res.send(value);}
   );
-  //console.log(payload);
-  //res.send(payload);
+
 })
 
 app.listen(3000);

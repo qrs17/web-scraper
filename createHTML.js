@@ -2,10 +2,9 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 const fs = require('fs');
 const juice = require('juice');
-const { clearScreenDown } = require('readline');
+//const { clearScreenDown } = require('readline');
 const format = require('html-format');
 const cssStyles = fs.readFileSync('styles.css').toString();
-//console.log(cssStyles);
 
 async function getTable() {
     // downloading the target web page
@@ -28,18 +27,17 @@ async function getTable() {
 
     //add header text to Request Trailer row
     $('th:nth-child(9)').text('Make Request');
-   
-    
+       
     //convert object to raw HTML
     const htmlElement = $('.trailer-move__results').html();
 
+    //inline CSS styles (needed to render in email)
     const inlinedHTML = juice.inlineContent(htmlElement,cssStyles);
-    //console.log(juicy);
-
+    
     //add domain to links
     const updatedHTML = inlinedHTML.replaceAll('/services', 'https://www.xtralease.com/services');
 
-    //clean up HTML
+    //clean up HTML, remove spaces
     const cleanHTML = format(updatedHTML);
 
     //write HTML to file
@@ -51,9 +49,8 @@ async function getTable() {
     //     }
     //   });
     
-      return cleanHTML;
-    //write to DOM
-    //document.getElementById("emailContent").innerHTML = "123456";
+    return cleanHTML;
+
 }
 
 module.exports = {getTable};
