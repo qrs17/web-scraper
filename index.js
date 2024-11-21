@@ -1,3 +1,14 @@
+const express = require('express');
+const app = express();
 const {getTable} = require ('./createHTML.js');
 
-getTable();
+app.get('/', function (req, res) {
+  res.set('Content-Type', 'text/plain');
+  getTable().then(
+    function(value) {console.log(value);res.send(value);}
+  );
+  //console.log(payload);
+  //res.send(payload);
+})
+
+app.listen(3000);

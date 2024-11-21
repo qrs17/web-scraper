@@ -7,7 +7,6 @@ const format = require('html-format');
 const cssStyles = fs.readFileSync('styles.css').toString();
 //console.log(cssStyles);
 
-
 async function getTable() {
     // downloading the target web page
     // by performing an HTTP GET request in Axios
@@ -29,7 +28,7 @@ async function getTable() {
 
     //add header text to Request Trailer row
     $('th:nth-child(9)').text('Make Request');
-    
+   
     
     //convert object to raw HTML
     const htmlElement = $('.trailer-move__results').html();
@@ -44,14 +43,15 @@ async function getTable() {
     const cleanHTML = format(updatedHTML);
 
     //write HTML to file
-        fs.writeFile('table.html', cleanHTML, err => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log('success!');
-        }
-      });
+    //     fs.writeFile('table.html', cleanHTML, err => {
+    //     if (err) {
+    //       console.error(err);
+    //     } else {
+    //       console.log('success!');
+    //     }
+    //   });
     
+      return cleanHTML;
     //write to DOM
     //document.getElementById("emailContent").innerHTML = "123456";
 }
